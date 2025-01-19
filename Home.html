@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel = "icon" type = "image/jpg" href = "https://nmgprod.s3.amazonaws.com/media/files/bd/a0/bda0bfc1dd54bceec158199b9a372b1a/cover_image_1700249180.jpg">
+  <title>Formula Flicks</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  min-height: 100vh;
+  background: url("background.jpg") no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-color: rgb(74, 72, 72);
+  color:#FFF
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  padding: 15px 50px;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  z-index: 100;
+}
+.header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transition: 0.5s;
+}
+.header:hover::before {
+  left: 100%;
+}
+.logo {
+  color: #fff;
+  font-size: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+.navbar a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  text-align: center;
+  transition: 0.3s;
+}
+.navbar a:hover {
+  color: #f00;
+}
+#menu-icon {
+  font-size: 36px;
+  color: #fff;
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .header {
+    padding: 1.25rem 4%;
+  }
+}
+@media (max-width: 768px) {
+  #menu-icon {
+    display: block;
+  }
+  .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem 4%;
+    display: none;
+  }
+  .navbar.active {
+    display: block;
+  }
+  .navbar a {
+    display: block;
+    margin: 1.5rem 0;
+  }
+  .nav-bg { 
+    position: absolute;
+    top: 79px;
+    left: 0;
+    width: 100%;
+    height: 295px;
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    z-index: 99;
+    display: none;
+  }
+  .nav-bg.active {
+    display: block;
+  }
+}
+
+    .video-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; 
+      overflow: hidden;
+      filter: brightness(70%);
+    }
+
+    .video-background iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1.2);
+      object-fit: cover;
+      width: 200%; 
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Add an overlay */
+    .video-background::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2); /* Adjust brightness here (0.5 = 50% darker) */
+      z-index: 1; /* Overlay above the video */
+    }
+
+    .content {
+      position: relative;
+      z-index: 2; /* Above the overlay */
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Button Styles */
+.navbar .nav-btn {
+  position: relative;
+  text-align: center;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  z-index: 0;
+  margin: 10px;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  color: #FFF; /* Button text color */
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar .nav-btn a {
+  text-decoration: none;
+  color: inherit; /* Inherit color from button */
+}
+
+.navbar .nav-btn::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  left: 0;
+  top: 0;
+  border-radius: 12px;
+  transition: background 0.3s ease-in-out;
+}
+
+/* Glowing Effect */
+.navbar .nav-btn::before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #FF0000, #FF7300, #FFFB00, #48FF00,
+    #00FFD5, #002BFF, #FF00C8, #FF0000
+  );
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  background-size: 600%;
+  z-index: -1;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  filter: blur(8px);
+  border-radius: 12px;
+  opacity: 0;
+  animation: glowing 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Glowing Animation */
+@keyframes glowing {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+/* Hover Effects */
+.navbar .nav-btn:hover::before {
+  opacity: 1;
+}
+
+.navbar .nav-btn:hover {
+  color: #FFF; /* Ensure text remains visible */
+}
+
+.navbar .nav-btn:active:after {
+  background: transparent;
+}
+
+.navbar .nav-btn:active {
+  color: #000; /* Change text color on active click */
+  font-weight: bold;
+}
+
+.hero {
+  text-align: center;
+  margin-top: 150px;
+  padding: 20px;
+}
+.hero h1 {
+  font-size: 80px;
+  margin-bottom: 20px;
+  font-family:cursive;
+  
+}
+.hero h2 {
+  font-size: 80px;
+  margin-bottom: 20px;
+  color:#f00;
+  font-family:cursive
+}
+.hero p {
+  font-size: 24px;
+  margin-bottom: 30px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+/* Quick Links Section */
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 25px;
+  padding: 90px;
+  text-align: center;
+}
+
+.quick-links .card {
+  background: rgba(17, 17, 17, 0.7); 
+  color: #fff; 
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  transition: transform 0.3s ease;
+  text-align: center;
+  margin: 0 auto;
+  overflow: hidden; 
+  z-index: 1; 
+}
+
+/* Add glowing animated border */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.quick-links .card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; 
+  border: 3.5px solid transparent; 
+  background-image: conic-gradient(
+    from var(--angle), 
+    #FF4500, #1E90FF, #32CD32, #FF00C8,#ff8800
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  background-clip: border-box;
+  mask-composite: exclude; /* Ensures glow only on border */
+  -webkit-mask-composite: destination-out; /* For better compatibility */
+  z-index: -1; /* Place behind the card */
+  border-radius: 12px;
+  filter: blur(0.1rem);
+  opacity: 1;
+}
+
+.quick-links .card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border: 4px solid transparent;
+  filter: blur(1.5rem); /* Create glowing effect */
+  opacity: 0.5;
+  z-index: -2; /* Place behind both the card and the primary border */
+  border-radius: 12px;
+}
+
+/* Hover effect */
+.quick-links .card:hover {
+  transform: translateY(-10px);
+}
+
+.quick-links .card:hover::before {
+  animation: spin 2s linear infinite;
+}
+
+.quick-links .card:hover::after {
+  animation: spin 1s linear infinite;
+}
+
+/* Links styling */
+.quick-links a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.quick-links a:hover .card {
+  transform: translateY(-10px);
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 300deg;
+  }
+}
+
+
+footer {
+  text-align: center;
+  padding: 0px;
+  background: rgba(196, 196, 196, 0);
+}
+footer .social-icons a img {
+  width: 20px;
+  margin: 0 0px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+footer .social-icons a img:hover {
+  transform: scale(1.2);
+}
+.quick-links .card h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+}
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 50px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
+.end{
+  background-color: #000;
+}
+/* Contact Us Section */
+#contact-us {
+  padding: 50px;
+  background: rgba(36, 36, 36, 0.8);
+  color: #fff;
+  text-align: center;
+}
+
+/* Glowing Heading Effect */
+#contact-us h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  position: relative;
+  background: linear-gradient(45deg, #FFDD00, #FF4500, #1E90FF, #32CD32, #FF00FF);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: glow-text 3s infinite linear;
+}
+
+@keyframes glow-text {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Form Styles with Glowing Borders */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+  position: relative;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+form input, form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 5px;
+  background: #222;
+  color: #fff;
+  outline: none;
+  font-size: 16px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+form input:focus, form textarea:focus {
+  box-shadow: 0 0 15px rgba(255, 69, 0, 0.7),
+              0 0 30px rgba(30, 144, 255, 0.6),
+              0 0 45px rgba(50, 205, 50, 0.5),
+              0 0 60px rgba(255, 0, 200, 0.4);
+}
+
+/* Glowing Border Effect */
+form input::after, form textarea::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 5px;
+  pointer-events: none;
+}
+
+form button {
+  padding: 10px 20px;
+  background: rgba(36, 36, 36, 0.8);
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+form button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  border: 3px solid transparent;
+  background: conic-gradient(
+    #FF4500, #1E90FF, #32CD32, #FF00C8, #FF8800
+  );
+  border-radius: 5px;
+  background-size: 200%;
+  animation: spin-border 2s linear infinite;
+}
+
+form button:hover {
+  background: #FF4500;
+  color: #000;
+  box-shadow: 0 0 20px rgba(255, 69, 0, 0.8),
+              0 0 40px rgba(30, 144, 255, 0.7),
+              0 0 60px rgba(50, 205, 50, 0.6),
+              0 0 80px rgba(255, 0, 200, 0.5);
+}
+
+@keyframes spin-border {
+  from {
+    background-position: 0% 0%;
+  }
+  to {
+    background-position: 200% 200%;
+  }
+}
+
+/* Adjust Text Area Background (No Animation) */
+form textarea {
+  background: rgba(36, 36, 36, 0.8); /* Static background */
+}
+
+</style>
+</head>
+
+
+<body>
+  <div class="video-background">
+    <iframe 
+      src="https://youtube.com/embed/aI31JRBZ22M?end=113&autoplay=1&controls=0&showinfo=0&autohide=1&mute=1&modestbranding=1&rel=0&loop=1&playlist=aI31JRBZ22M"
+      frameborder="0" 
+      allow="autoplay"
+      allowfullscreen></iframe>
+  </div>
+  <header class="header">
+    <a href="Home.html" class="logo">FORMULA FLICKS</a>
+    <i class='bx bx-menu' id="menu-icon"></i>
+    <nav class="navbar">
+      <button class="nav-btn"><a href="Home.html">HOME</a></button>
+      <button class="nav-btn"><a href="Drivers.html">DRIVERS</a></button>
+      <button class="nav-btn"><a href="Teams.html">TEAMS</a></button>
+      <button class="nav-btn"><a href="Results.html">RESULTS</a></button>
+      <button class="nav-btn"><a href="Highlights.html">HIGHLIGHTS</a></button>
+    </nav>
+  </header>
+  
+<div class="nav-bg"></div>
+
+
+ <!-- Welcome Banner -->
+ <section class="hero">
+  <h1>Welcome to </h1><h2>FORMULA FLICKS</h2>
+  <p>Your one-stop destination for F1 updates, highlights, and more!</p>
+  <p>Experience the Thrill of Formula 1</p>
+ 
+</section>
+
+<section class="quick-links">
+  <a href="drivers.html" class="card" id="drivers">
+    <h3>Drivers</h3>
+    <p>Learn about your favorite drivers and their achievements.</p>
+  </a>
+  <a href="teams.html" class="card" id="teams">
+    <h3>Teams</h3>
+    <p>Discover the teams competing in the current season.</p>
+  </a>
+  <a href="highlights.html" class="card" id="highlights">
+    <h3>Race Highlights</h3>
+    <p>Catch up on the most exciting moments of every race.</p>
+  </a>
+  <a href="results.html" class="card" id="results">
+    <h3>Results</h3>
+    <p>Check out the latest race results and standings.</p>
+  </a>
+</section>
+<br><br><br>
+
+<!-- Contact Us Section -->
+<section id="contact-us" style="padding: 50px; background: rgba(36, 36, 36, 0.8); color: #fff; text-align: center;">
+  <h2 style="margin-bottom: 20px; font-family: 'Poppins', sans-serif;">Contact Us</h2>
+  <p style="margin-bottom: 30px;">Have any questions, suggestions, or feedback? We'd love to hear from you!</p>
+  <form action="#" method="post" style="max-width: 600px; margin: 0 auto; text-align: left;">
+    <label for="name" style="display: block; margin-bottom: 10px;">Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter your name" required 
+      style="width: 100%; padding: 10px; margin-bottom: 20px; border: none; border-radius: 5px;">
+
+    <label for="email" style="display: block; margin-bottom: 10px;">Email:</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email" required 
+      style="width: 100%; padding: 10px; margin-bottom: 20px; border: none; border-radius: 5px;">
+
+    <label for="message" style="display: block; margin-bottom: 10px;">Message:</label>
+    <textarea id="message" name="message" rows="4" placeholder="Enter your message" required 
+      style="width: 100%; padding: 10px; margin-bottom: 20px; border: none; border-radius: 5px;"></textarea>
+
+    <button type="submit" style="padding: 10px 20px; background: #ff4500; border: none; border-radius: 5px; color: #fff; font-weight: bold; cursor: pointer;">
+      Send Message
+    </button>
+  </form>
+</section>
+
+<!-- Footer -->
+<footer>
+  
+  <div class="social-icons">
+    <a href="#" class="fa fa-instagram"></a>
+    <a href="#" class="fa fa-youtube"></a>
+    <p class="end">&copy; 2024 Formula Flicks. All Rights Reserved.</p>
+  </div>
+</footer>
+<script>
+    const menuIcon = document.querySelector('#menu-icon');
+    const navbar = document.querySelector('.navbar');
+    const navbg = document.querySelector('.nav-bg');
+    menuIcon.addEventListener('click', () => {
+      menuIcon.classList.toggle('bx-x');
+      navbar.classList.toggle('active');
+      navbg.classList.toggle('active');
+    });
+</script>
+ 
+</body>
+</html> 
